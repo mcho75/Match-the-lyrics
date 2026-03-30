@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
 import { searchSongs } from "../api/searchSongs.js"
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 
-function Search() {
+export default function Search() {
 
     let query = useParams().query;
     
     const [songsList, setSongsList] = useState([]);
     const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+    const [trackName, setTrackName] = useState(query.split("&")[0] || "");
+    const [artistName, setArtistName] = useState(query.split("&")[1] || "");
 
     useEffect(() => {
         async function fetchSongs() {
@@ -32,10 +33,29 @@ function Search() {
         fetchSongs();
     }, []);
 
+    const inputTrack = <input type="text" value={trackName} onChange={(e) => setTrackName(e.target.value)} placeholder="Rechercher dans le nom..."/>;
+    const inputArtist = <input type="text" value={artistName} onChange={(e) => setArtistName(e.target.value)} placeholder="Rechercher par artiste..."/>;
+
     return (
         <div>
-            <p>Résultats de la recherche pour :</p>
-            <p>{query.split("&")[0]} {query.split("&")[1]}</p>
+
+            <form>
+                <label>Titre :</label>
+                {inputTrack}
+                <label>Artiste :</label>
+                {inputArtist}
+            </form>
+
+            <button
+                onClick={() => {
+                    if (trackName == "" && artistName == "") {
+                        alert("La recherche ne peut pas être vide.");
+                    } else {
+                    window.location.href="/search/"+trackName+"&"+artistName
+                    }}}
+                className="search-button">
+                Lancer la recherche
+            </button>
 
             {songsList.length ? (    // Si il y a des chansons
                 <div className="song-list">
@@ -61,5 +81,3 @@ function Search() {
         </div>
     )
 }
-
-export default Search;

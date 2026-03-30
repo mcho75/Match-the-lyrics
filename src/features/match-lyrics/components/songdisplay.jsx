@@ -1,10 +1,3 @@
-/**
- * Displays the hidden and guessed words of a song, with correct punctuation.
- * 
- * every word, whitespace and punctuation is mapped to its div verse by verse.
- * @param {*} param0
- * @returns display component
- */
 export function SongDisplay({lyricsSet, guessedWords, verses}) {
     return (
         <div className="lyrics">

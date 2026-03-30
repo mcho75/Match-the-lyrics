@@ -2,6 +2,7 @@
     --accent-color-1: #efaf00;
     --accent-color-2: #000000;
     --accent-color-3: #ffffff;
+    --accent-color-4: #ef7700;
     font-family: Nerko One, system-ui, sans-serif;
     background-color: var(--accent-color-1);
     font-synthesis: none;
@@ -11,11 +12,38 @@
 }
 
 ::selection {
-    background-color: var(--accent-color-1);
+    background-color: var(--accent-color-4);
     color: var(--accent-color-3);
 }
 
-body {
+header {
+    display: flex;
+    align-items: end;
+    min-width: 500px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+header li {
+    cursor: pointer;
+    padding: 10px;
+    background-color: var(--accent-color-1);
+    color: var(--accent-color-2);
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.2s, color 0.2s;
+}
+header li:hover {
+    background-color: var(--accent-color-3);
+    color: var(--accent-color-4);
+}
+
+main {
     padding: 50px;
     place-items: center;
     justify-content: center;
@@ -32,7 +60,6 @@ body {
 }
 
 button {
-    margin: 20px;
     border-radius: 50px;
     border: 2px solid transparent;
     padding: 0.5em 1em;
@@ -66,6 +93,12 @@ input {
 input:hover {
     box-shadow: 0px 0px 5px var(--accent-color-1);
     border-color: var(--accent-color-1);
+}
+
+form {
+    display: block;
+    margin: 20px;
+    align-items: center;
 }
 
 .entete {
@@ -131,6 +164,46 @@ input:hover {
 .artist-name {
     color: var(--accent-color-2);
     margin-top: 0px;
+}
+
+.logo-image {
+    width: 7%;
+    height: 7%;
+    margin: 20px;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    cursor: pointer;
+    background-color: var(--accent-color-1);
+    color: var(--accent-color-2);
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.2s, color 0.2s;
+}
+.profile-container:hover {
+    background-color: var(--accent-color-3);
+    color: var(--accent-color-4);
+}
+
+.profile-info {
+    margin: 5px;
+    line-height: 0.8em;
+    width: 70px;
+}
+
+.profile-name {
+    margin: 0;
+}
+
+.profile-level {
+    font-size: 0.7em;
+    margin: 0;
+}
+
+.profile-pic {
+    margin: 5px;
 }
 
 @font-face {
