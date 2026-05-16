@@ -206,6 +206,14 @@ form {
     margin: 5px;
 }
 
+.guessed {
+    color: var(--accent-color-2);
+}
+
+.notguessed {
+    color: var(--accent-color-4);
+}
+
 @font-face {
   font-family: "Nerko One";
   src: local("NerkoOne"),

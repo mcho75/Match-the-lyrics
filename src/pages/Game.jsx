@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchData } from "../api/fetchLyrics.js"
 import { extractCleanedLyrics, extractCompleteVerses } from "../features/match-lyrics/utils/lyricsProcessor.js"
-import { LyricInput } from "../features/match-lyrics/components/lyricinput.jsx"
-import { SongDisplay } from "../features/match-lyrics/components/songdisplay.jsx"
+import { LyricInput } from "../features/match-lyrics/components/LyricInput.jsx"
+import { SongDisplay } from "../features/match-lyrics/components/SongDisplay.jsx"
 import { useParams } from "react-router";
 
 
@@ -15,6 +15,7 @@ function Game(){
     let id = useParams().id;    // Récupère le paramètre id dans l'URL
 
     const [guessedWords, setGuessedWords] = useState([]);
+    const [notGuessedWords, setNotGuessedWords] = useState([]);
     const [lyricsSet, setLyricsSet] = useState(null);
     const [songName, setSongName] = useState("");
 	const [guess, setGuess] = useState("");
@@ -68,12 +69,14 @@ function Game(){
             <SongDisplay 
 				lyricsSet={lyricsSet}
 				guessedWords={guessedWords}
-				verses={verses}/>
+				verses={verses}
+				notGuessedWords={notGuessedWords}/>
 
             <button
                 onClick={() => {
-                    alert("Votre score est de " + guessedWords.length + " mots trouvés sur " + lyricsSet.size);
-                    setGuessedWords(Array.from(lyricsSet));
+                    alert("Votre score est de " + guessedWords.length + " mots trouvés sur " + lyricsSet.size
+                        + ", ce qui fait un pourcentage de " + Math.round((guessedWords.length / lyricsSet.size) * 100) + "%.");
+                    setNotGuessedWords(Array.from(lyricsSet));
                 }}>
                 Afficher le reste des paroles
             </button>

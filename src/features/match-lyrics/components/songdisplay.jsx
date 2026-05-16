@@ -1,4 +1,4 @@
-export function SongDisplay({lyricsSet, guessedWords, verses}) {
+export function SongDisplay({lyricsSet, guessedWords, verses, notGuessedWords}) {
     return (
         <div className="lyrics">
             {lyricsSet && verses.map((verse, verseIndex) => (
@@ -7,12 +7,20 @@ export function SongDisplay({lyricsSet, guessedWords, verses}) {
                     {verse && verse.map((pos, posIndex) => {
                         
                         const isWord = lyricsSet.has(pos.toLowerCase());
-                        const word = (!isWord || guessedWords.includes(pos.toLowerCase())) ? pos : "_".repeat(pos.length);
+                        const word = (!isWord
+                            || guessedWords.includes(pos.toLowerCase())
+                            || notGuessedWords.includes(pos.toLowerCase())) ? pos : "_".repeat(pos.length);
 
                         return (
                             <span
                                 key={posIndex}
-                                className={isWord ? (guessedWords.includes(pos.toLowerCase()) ? "guessed" : "hidden") : "punctuation"}
+                                className={isWord
+                                    ? (guessedWords.includes(pos.toLowerCase())
+                                        ? "guessed"
+                                        : notGuessedWords.includes(pos.toLowerCase())
+                                            ? "notguessed"
+                                            : "hidden")
+                                    : "punctuation"}
                                 style={{ whiteSpace: "pre-wrap" }}>
                                 {word}
                             </span>
